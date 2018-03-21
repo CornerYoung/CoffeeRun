@@ -5,7 +5,7 @@
 
   function FormHandler(selector){
     if(!selector){
-      throw new Error('No selector provided');
+      throw new Error('No selector provided');//未传入selector则抛出异常
     }
 
     this.$formElement = $(selector);
