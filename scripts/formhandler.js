@@ -21,8 +21,11 @@
     this.$formElement.on('submit',function(event){
       event.preventDefault();
 
-      var data = $(this).serializeArray();
-      console.log(data);
+      var data = {};
+      $(this).serializeArray().forEach(function(item){  //遍历数组并复制每个元素的值
+        data[item.name] = item.value;
+        console.log(item.name + 'is' + item.value);
+      });
     });
   };
 
