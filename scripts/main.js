@@ -6,6 +6,7 @@
   var Truck = App.Truck;
   var DataStore = App.DataStore;
   var FormHandler = App.FormHandler;
+  var Validation = App.Validation;
   var CheckList = App.CheckList;
   var myTruck = new Truck('ncc-1701',new DataStore());
 
@@ -23,6 +24,8 @@
     myTruck.createOrder.call(myTruck,data);  //当 createOrder 和 addRow 被调用时，传递了正确的this值和表单中的数据
     checkList.addRow.call(checkList,data);
   });
+
+  formHandler.addInputHandler(Validation.isCompanyEmail);
 
 
 })(window);

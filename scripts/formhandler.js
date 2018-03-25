@@ -33,6 +33,20 @@
     });
   };
 
+  FormHandler.prototype.addInputHandler = function(fn){
+    console.log('Setting input handler for form');
+    this.$formElement.on('input','[name="emailAddress"]',function(event){
+      var emailAddress = event.target.value;
+      var message = '';
+      if(fn(emailAddress)){
+        event.target.setCustomValidity('');
+      }else{
+        message = emailAddress + ' 不是一个合法的邮箱地址!'
+        event.target.setCustomValidity(message);
+      };
+    });
+  };
+
   App.FormHandler = FormHandler;
   window.App = App;
 })(window);
