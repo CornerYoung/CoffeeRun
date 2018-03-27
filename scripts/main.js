@@ -25,8 +25,10 @@
   // 此时， createOrder 内部的this将不再是 Trunk 实例，这导致了 createOrder 运行时报错。
   // 应该把 myTrunk.createOrder 的所有者绑定为myTrunk，然后再把这个函数传给 ormHandler.addSubmitHandler。
   formHandler.addSubmitHandler(function(data){
-    myTruck.createOrder.call(myTruck,data);  //当 createOrder 和 addRow 被调用时，传递了正确的this值和表单中的数据
-    checkList.addRow.call(checkList,data);
+    myTruck.createOrder.call(myTruck,data)
+      .then(function(){
+        checkList.addRow.call(checkList,data); //在createOrder后添加.then。传入一个执行checkList.addRow的回调函数
+      })                                       //这让addRow在createOrder正常运行完毕后才被调用，而不是立即被调用
   });
 
   formHandler.addInputHandler(Validation.isCompanyEmail);
